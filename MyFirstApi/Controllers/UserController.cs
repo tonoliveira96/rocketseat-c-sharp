@@ -10,7 +10,7 @@ namespace MyFirstApi.Controllers
     {
         [HttpGet]
         [Route("{id}")]
-        [ProducesResponseType(typeof(User),StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Get(int id)
         {
@@ -24,7 +24,7 @@ namespace MyFirstApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody]RequestRegistertJson request)
+        public IActionResult Create([FromBody] RequestRegistertJson request)
         {
             var result = new ResponseRegisterUserJson
             {
@@ -35,14 +35,18 @@ namespace MyFirstApi.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public IActionResult Update([FromBody] RequestUpdateProfileJson request)
         {
-            var result = new ResponseRegisterUserJson
-            {
-                Id = "1",
-                Name = "User"
-            };
-            return Created(string.Empty, result);
+            return NoContent();
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public IActionResult Remove([FromRoute] int id)
+        {
+            return NoContent();
         }
     }
 }
