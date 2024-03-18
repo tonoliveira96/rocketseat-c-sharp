@@ -23,7 +23,19 @@ namespace MyFirstApi.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
         public IActionResult Create([FromBody]RequestRegistertJson request)
+        {
+            var result = new ResponseRegisterUserJson
+            {
+                Id = "1",
+                Name = "User"
+            };
+            return Created(string.Empty, result);
+        }
+
+        [HttpPut]
+        public IActionResult Update([FromBody] RequestUpdateProfileJson request)
         {
             var result = new ResponseRegisterUserJson
             {
