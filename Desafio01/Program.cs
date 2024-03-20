@@ -4,7 +4,7 @@ namespace Program
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
 
             Console.WriteLine("Task 1 - Digite seu nome para receber uma mensagem de boas vindas: ");
@@ -33,6 +33,21 @@ namespace Program
             Console.Write("Multiplicação: " + calc.Multiplicacao() + "\n");
             Console.Write("Divisão: " + calc.Divisao() + "\n");
             Console.Write("Média: " + calc.Media() + "\n");
+            Console.WriteLine("**********************************************");
+
+            Console.WriteLine("Task 4 - Contagem de caracteres: ");
+            Console.WriteLine("Digite qualquer palavra: ");
+            var palavra = Console.ReadLine();
+            var palavraFormatada = palavra.ToString().Trim().Replace(" ", "").Length;
+            Console.WriteLine("Quantidade de caracteres: " + palavraFormatada);
+            Console.WriteLine("\n");
+            Console.WriteLine("**********************************************");
+
+            Console.WriteLine("Task 5 - Verifica placa do carro: ");
+            Console.WriteLine("Digite a placa do carro: ");
+            var placa = Console.ReadLine();
+        
+            Console.WriteLine("\n");
             Console.WriteLine("**********************************************");
         }
     }
