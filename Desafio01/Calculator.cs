@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Desafio01
+﻿namespace Desafio01
 {
     public class Calculator
     {
@@ -17,20 +11,11 @@ namespace Desafio01
             Valor2 = valor2;
         }
 
-        public double Soma()
-        {
-            return Valor1 + Valor2;
-        }
+        public double Soma() => Valor1 + Valor2;
 
-        public double Subtracao()
-        {
-            return Valor1 - Valor2;
-        }
+        public double Subtracao() => Valor1 - Valor2;
 
-        public double Multiplicacao()
-        {
-            return Valor1 * Valor2;
-        }
+        public double Multiplicacao() => Valor1 * Valor2;
 
         public double Divisao()
         {
