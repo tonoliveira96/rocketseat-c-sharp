@@ -23,7 +23,7 @@ namespace Desafio02.Controllers
             return Ok(new List<Book>());
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         [ProducesResponseType(typeof(Book), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Update()
@@ -31,7 +31,7 @@ namespace Desafio02.Controllers
             return Ok(new List<Book>());
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ProducesResponseType(typeof(Book), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Remove()
