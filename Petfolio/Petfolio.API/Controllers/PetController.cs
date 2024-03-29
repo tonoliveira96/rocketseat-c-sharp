@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Petfolio.Application.UseCases.Pet.GetAll;
+using Petfolio.Application.UseCases.Pet.GetById;
 using Petfolio.Application.UseCases.Pet.Register;
 using Petfolio.Application.UseCases.Pet.Update;
 using Petfolio.Communication.Requests;
@@ -47,6 +48,18 @@ namespace Petfolio.API.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(ResponsePetJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponsePetJson), StatusCodes.Status404NotFound)]
+        public IActionResult Get(int id)
+        {
+            var useCase = new GetPetByIdUseCase();
+            var response = useCase.Execute(id);
+
+            return Ok(response);
         }
     }
 }
