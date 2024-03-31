@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Desafio03.Communication\Desafio03.Communication.csproj" />
+  </ItemGroup>
+
 </Project>
