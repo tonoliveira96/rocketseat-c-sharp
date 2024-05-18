@@ -18,8 +18,8 @@ namespace CashFlow.Application.UseCases.Expenses.Register
                 .LessThanOrEqualTo(DateTime.UtcNow)
                 .WithMessage(ResourceErrorMessages.EXPENSES_CANNOT_BE_IN_FUTURE);
             RuleFor(expense => expense.PaymentType)
-                .IsInEnum().
-                WithMessage(ResourceErrorMessages.PAYMENT_TYPE_INVALID);
+                .IsInEnum()
+                .WithMessage(ResourceErrorMessages.PAYMENT_TYPE_INVALID);
         }
     }
 }
