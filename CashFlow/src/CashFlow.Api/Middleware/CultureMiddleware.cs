@@ -13,7 +13,7 @@ namespace CashFlow.Api.Middleware
         {
             var culture = context.Request.Headers.AcceptLanguage.FirstOrDefault();
 
-            var cultureInfo = new CultureInfo(culture);
+            var cultureInfo = new CultureInfo("en");
 
             if (string.IsNullOrWhiteSpace(culture) == false)
             {
