@@ -22,9 +22,9 @@ namespace CashFlow.Api.Filters
 
         private void HandleProjectException(ExceptionContext context)
         {
-            if (context.Exception is ErrorOnValidatorException)
+            if (context.Exception is ErrorOnValidationException)
             {
-                var ex = (ErrorOnValidatorException)context.Exception;
+                var ex = (ErrorOnValidationException)context.Exception;
                 var errorResponse = new ResponseErrorJson(ex.Errors);
                 context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
                 context.Result = new BadRequestObjectResult(errorResponse);
