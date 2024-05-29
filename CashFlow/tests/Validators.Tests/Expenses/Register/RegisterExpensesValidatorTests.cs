@@ -1,5 +1,8 @@
 using CashFlow.Application.UseCases.Expenses.Register;
-using CashFlow.Communication.Requests;
+using CashFlow.Communication.Enums;
+using CashFlow.Exeption;
+using CommonTestUtilities.Requests;
+using FluentAssertions;
 
 namespace Validators.Tests.Expenses.Register
 {
@@ -10,20 +13,84 @@ namespace Validators.Tests.Expenses.Register
         {
             // Arrange
             var validator = new RegisterExpenseValidator();
-            var request = new RequestRegisterExpensesJson
-            {
-                Amount = 100,
-                Date = DateTime.Now.AddDays(-1),
-                Description = "description",
-                PaymentType = CashFlow.Communication.Enums.PaymentsType.Cash,
-                Title = "title",
-            };
+            var request = RequestRegisterExpensesJsonBuilder.Build();
 
             // Act
             var result = validator.Validate(request);
 
             // Assert
-            Assert.True(result.IsValid);
+            result.IsValid.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Error_Title_Empty()
+        {
+            // Arrange
+            var validator = new RegisterExpenseValidator();
+            var request = RequestRegisterExpensesJsonBuilder.Build();
+            request.Title = string.Empty;
+
+            // Act
+            var result = validator.Validate(request);
+
+            // Assert
+            result.IsValid.Should().BeFalse();
+            result.Errors.Should().ContainSingle()
+                .And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessages.TITLE_REQUIRED));
+        }
+
+        [Fact]
+        public void Error_Date_Future()
+        {
+            // Arrange
+            var validator = new RegisterExpenseValidator();
+            var request = RequestRegisterExpensesJsonBuilder.Build();
+            request.Date = DateTime.UtcNow.AddDays(1);
+
+            // Act
+            var result = validator.Validate(request);
+
+            // Assert
+            result.IsValid.Should().BeFalse();
+            result.Errors.Should().ContainSingle()
+                .And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessages.EXPENSES_CANNOT_BE_IN_FUTURE));
+        }
+
+        [Fact]
+        public void Error_Payment_Type_Ivalid()
+        {
+            // Arrange
+            var validator = new RegisterExpenseValidator();
+            var request = RequestRegisterExpensesJsonBuilder.Build();
+            request.PaymentType = (PaymentsType) 700;
+
+            // Act
+            var result = validator.Validate(request);
+
+            // Assert
+            result.IsValid.Should().BeFalse();
+            result.Errors.Should().ContainSingle()
+                .And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessages.PAYMENT_TYPE_INVALID));
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        [InlineData(-7)]
+        public void Error_Amount_Invalid(decimal amount)
+        {
+            // Arrange
+            var validator = new RegisterExpenseValidator();
+            var request = RequestRegisterExpensesJsonBuilder.Build();
+            request.Amount = amount;
+
+            // Act
+            var result = validator.Validate(request);
+
+            // Assert
+            result.IsValid.Should().BeFalse();
+            result.Errors.Should().ContainSingle()
+                .And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessages.VALUE_MUST_BE_GREATER_THAN_ZERO));
         }
     }
 }
