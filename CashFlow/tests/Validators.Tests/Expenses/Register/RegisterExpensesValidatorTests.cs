@@ -22,13 +22,16 @@ namespace Validators.Tests.Expenses.Register
             result.IsValid.Should().BeTrue();
         }
 
-        [Fact]
-        public void Error_Title_Empty()
+        [Theory]
+        [InlineData("")]
+        [InlineData("     ")]
+        [InlineData(null)]
+        public void Error_Title_Empty(string title)
         {
             // Arrange
             var validator = new RegisterExpenseValidator();
             var request = RequestRegisterExpensesJsonBuilder.Build();
-            request.Title = string.Empty;
+            request.Title = title;
 
             // Act
             var result = validator.Validate(request);
