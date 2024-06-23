@@ -8,7 +8,7 @@ using CashFlow.Exeption.ExceptionBase;
 
 namespace CashFlow.Application.UseCases.Expenses.Register
 {
-    public class RegisterExpensesUseCase: IRegisterExpensesUseCase
+    public class RegisterExpensesUseCase : IRegisterExpensesUseCase
     {
         private readonly IExpensesRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
@@ -18,7 +18,7 @@ namespace CashFlow.Application.UseCases.Expenses.Register
             _unitOfWork = unitOfWork;
         }
 
-        public ResponseRegisterExpensesJson Execute(RequestRegisterExpensesJson request)
+        public async Task<ResponseRegisterExpensesJson> Execute(RequestRegisterExpensesJson request)
         {
             Validate(request);
 
@@ -31,8 +31,8 @@ namespace CashFlow.Application.UseCases.Expenses.Register
                 PaymentType = (PaymentType)request.PaymentType
             };
 
-            _repository.Add(entity);
-            _unitOfWork.Commit();
+            await _repository.Add(entity);
+            await _unitOfWork.Commit();
 
             return new ResponseRegisterExpensesJson();
         }
@@ -43,7 +43,7 @@ namespace CashFlow.Application.UseCases.Expenses.Register
 
             var result = validator.Validate(request);
 
-            if(!result.IsValid)
+            if (!result.IsValid)
             {
                 var errorMessages = result.Errors.Select(f => f.ErrorMessage).ToList();
 
