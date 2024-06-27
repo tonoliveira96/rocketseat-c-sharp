@@ -4,6 +4,7 @@ using CashFlow.Application.UseCases.Expenses.Register;
 using CashFlow.Communication.Requests;
 using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Repositories.Expenses;
+using CashFlow.Exeption;
 using CashFlow.Exeption.ExceptionBase;
 
 namespace CashFlow.Application.UseCases.Expenses.Update
@@ -25,7 +26,14 @@ namespace CashFlow.Application.UseCases.Expenses.Update
         {
             Validate(request);
 
-            _repository.Update();
+            var expense = await _repository.GetById(id);
+
+            if (expense is null)
+            {
+                throw new NotFoundException(ResourceErrorMessages.EXPENSE_NOT_FOUND);
+            }
+            _mapper.Map(request, expense);
+            _repository.Update(expense);
 
             await _unitOfWork.Commit();
         }
