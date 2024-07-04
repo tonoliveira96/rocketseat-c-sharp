@@ -15,6 +15,11 @@ namespace CashFlow.Application.UseCases.Reports.Excel
             var workSheet = workBook.Worksheets.Add(month.ToString("y"));
 
             InsertHeader(workSheet);
+
+            var file = new MemoryStream();
+            workBook.SaveAs(file);
+
+            return file.ToArray();
         }
 
         private void InsertHeader(IXLWorksheet worksheet)
