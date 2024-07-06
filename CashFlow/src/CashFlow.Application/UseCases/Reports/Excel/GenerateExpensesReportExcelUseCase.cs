@@ -1,6 +1,8 @@
+using CashFlow.Domain.Enums;
 using CashFlow.Domain.Reports;
 using CashFlow.Domain.Repositories.Expenses;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace CashFlow.Application.UseCases.Reports.Excel
 {
@@ -15,19 +17,48 @@ namespace CashFlow.Application.UseCases.Reports.Excel
 
         public async Task<byte[]> Execute(DateOnly month)
         {
+            var expenses = await _repository.FilterByMonth(month);
+            if(expenses.Count == 0)
+            {
+                return [];
+            }
+
             var workBook = new XLWorkbook();
 
             workBook.Author = "Everton Oliveira";
             workBook.Style.Font.FontSize = 12;
 
-            var workSheet = workBook.Worksheets.Add(month.ToString("y"));
+            var workSheet = workBook.Worksheets.Add(month.ToString("Y"));
 
             InsertHeader(workSheet);
+
+            var row = 2;
+            foreach( var expense in expenses)
+            {
+                workSheet.Cell($"A{row}").Value = expense.Title;
+                workSheet.Cell($"B{row}").Value = expense.Date;
+                workSheet.Cell($"C{row}").Value = ConvertPaymentType(expense.PaymentType);
+                workSheet.Cell($"D{row}").Value = expense.Amount;
+                workSheet.Cell($"E{row}").Value = expense.Description;
+                row++;
+            }
 
             var file = new MemoryStream();
             workBook.SaveAs(file);
 
             return file.ToArray();
+        }
+
+        private string ConvertPaymentType(PaymentType payment)
+        {
+            return payment switch
+            {
+                PaymentType.Cash => "Dinheiro",
+                PaymentType.CreditCard => "Cartão de Crédito",
+                PaymentType.DebitCard => "Cartão de Débito",
+                PaymentType.EletronicTransfer => "Pix",
+                _ => string.Empty,
+            };
         }
 
         private void InsertHeader(IXLWorksheet worksheet)
