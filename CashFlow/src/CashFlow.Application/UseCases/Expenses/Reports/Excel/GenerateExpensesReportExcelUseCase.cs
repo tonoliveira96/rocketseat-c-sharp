@@ -4,7 +4,7 @@ using CashFlow.Domain.Repositories.Expenses;
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
 
-namespace CashFlow.Application.UseCases.Reports.Excel
+namespace CashFlow.Application.UseCases.Expenses.Reports.Excel
 {
     public class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUseCase
     {
@@ -19,7 +19,7 @@ namespace CashFlow.Application.UseCases.Reports.Excel
         public async Task<byte[]> Execute(DateOnly month)
         {
             var expenses = await _repository.FilterByMonth(month);
-            if(expenses.Count == 0)
+            if (expenses.Count == 0)
             {
                 return [];
             }
@@ -34,7 +34,7 @@ namespace CashFlow.Application.UseCases.Reports.Excel
             InsertHeader(workSheet);
 
             var row = 2;
-            foreach( var expense in expenses)
+            foreach (var expense in expenses)
             {
                 workSheet.Cell($"A{row}").Value = expense.Title;
                 workSheet.Cell($"B{row}").Value = expense.Date;

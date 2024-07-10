@@ -1,7 +1,8 @@
-
+using CashFlow.Application.UseCases.Expenses.Reports.Pdf.Fonts;
 using CashFlow.Domain.Repositories.Expenses;
+using PdfSharp.Fonts;
 
-namespace CashFlow.Application.UseCases.Reports.Pdf
+namespace CashFlow.Application.UseCases.Expenses.Reports.Pdf
 {
     public class GenerateExpensesReportPdfUseCase : IGenerateExpensesReportPdfUseCase
     {
@@ -10,12 +11,14 @@ namespace CashFlow.Application.UseCases.Reports.Pdf
         public GenerateExpensesReportPdfUseCase(IExpensesReadOnlyRepository repository)
         {
             _repository = repository;
+
+            GlobalFontSettings.FontResolver = new ExpensesExportFontsResolver();
         }
 
         public async Task<byte[]> Execute(DateOnly month)
         {
             var expenses = await _repository.FilterByMonth(month);
-            if(expenses.Count == 0)
+            if (expenses.Count == 0)
             {
                 return [];
             }
