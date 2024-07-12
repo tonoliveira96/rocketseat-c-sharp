@@ -30,6 +30,16 @@ namespace CashFlow.Application.UseCases.Expenses.Reports.Pdf
             var document = CreateDocument(month);
             var page = CreatePage(document);
 
+            var table = page.AddTable();
+            table.AddColumn();
+            table.AddColumn();
+
+            var row = table.AddRow();
+            row.Cells[0].AddImage("C:\\Users\\everton.oliveira\\Documents\\profile.png");
+            row.Cells[1].AddParagraph("Olá, Everton");
+            row.Cells[1].Format.Font = new Font { Name = FontHelper.RELEWAY_BLACK, Size = 16 };
+
+
             var paragraph = page.AddParagraph();
             var title = string.Format(ResourceReportGenerationMessages.TOTAL_SPENT_IN, month.ToString("Y"));
 
