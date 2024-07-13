@@ -2,6 +2,7 @@ using CashFlow.Application.UseCases.Expenses.Reports.Pdf.Fonts;
 using CashFlow.Domain.Reports;
 using CashFlow.Domain.Repositories.Expenses;
 using MigraDoc.DocumentObjectModel;
+using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using PdfSharp.Fonts;
 using System.Reflection;
@@ -34,6 +35,11 @@ namespace CashFlow.Application.UseCases.Expenses.Reports.Pdf
             CreateHeaderWithProfilePhotoAndName(page);
             var totalExpenses = expenses.Sum(expenses => expenses.Amount);
             CreateTotalExpenseSection(page, month, totalExpenses);
+
+            foreach (var expense in expenses)
+            {
+                var table = CreateExpensesTable(page);
+            }
 
             return RenderDocument(document);
         }
@@ -75,7 +81,7 @@ namespace CashFlow.Application.UseCases.Expenses.Reports.Pdf
             var assemby = Assembly.GetExecutingAssembly();
             var directoryName = Path.GetDirectoryName(assemby.Location);
 
-            row.Cells[0].AddImage(Path.Combine(directoryName!, "UseCases","Expenses","Reports","Pdf","Logo", "logo.png"));
+            row.Cells[0].AddImage(Path.Combine(directoryName!, "UseCases", "Expenses", "Reports", "Pdf", "Logo", "logo.png"));
             row.Cells[1].AddParagraph("Olá, Everton");
             row.Cells[1].Format.Font = new Font { Name = FontHelper.RELEWAY_BLACK, Size = 16 };
             row.Cells[1].VerticalAlignment = MigraDoc.DocumentObjectModel.Tables.VerticalAlignment.Center;
@@ -93,6 +99,17 @@ namespace CashFlow.Application.UseCases.Expenses.Reports.Pdf
 
             paragraph.AddLineBreak();
             paragraph.AddFormattedText($"{totalExpenses} {CURRENCY_SYMBOL}", new Font { Name = FontHelper.WORLSANS_BLACK, Size = 50 });
+        }
+
+        private Table CreateExpensesTable(Section page)
+        {
+            var table = page.AddTable();
+            table.AddColumn("195").Format.Alignment = ParagraphAlignment.Left;
+            table.AddColumn("80").Format.Alignment = ParagraphAlignment.Center;
+            table.AddColumn("195").Format.Alignment = ParagraphAlignment.Center;
+            table.AddColumn("195").Format.Alignment = ParagraphAlignment.Right;
+
+            return table;
         }
 
         private byte[] RenderDocument(Document document)
