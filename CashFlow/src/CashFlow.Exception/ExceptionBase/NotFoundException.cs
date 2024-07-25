@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace CashFlow.Exeption.ExceptionBase
+namespace CashFlow.Exception.ExceptionBase
 {
     public class NotFoundException : CashFlowException
     {

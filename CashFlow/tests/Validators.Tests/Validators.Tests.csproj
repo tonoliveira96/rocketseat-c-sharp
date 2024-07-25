@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CashFlow.Exeption\CashFlow.Exeption.csproj" />
     <ProjectReference Include="..\..\src\CashFlow.Application\CashFlow.Application.csproj" />
     <ProjectReference Include="..\..\src\CashFlow.Communication\CashFlow.Communication.csproj" />
     <ProjectReference Include="..\CommonTestUtilities\CommonTestUtilities.csproj" />

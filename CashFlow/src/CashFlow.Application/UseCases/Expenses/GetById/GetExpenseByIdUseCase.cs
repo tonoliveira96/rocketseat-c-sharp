@@ -1,8 +1,8 @@
 using AutoMapper;
 using CashFlow.Communication.Responses;
 using CashFlow.Domain.Repositories.Expenses;
-using CashFlow.Exeption;
-using CashFlow.Exeption.ExceptionBase;
+using CashFlow.Exception;
+using CashFlow.Exception.ExceptionBase;
 
 namespace CashFlow.Application.UseCases.Expenses.GetById
 {
