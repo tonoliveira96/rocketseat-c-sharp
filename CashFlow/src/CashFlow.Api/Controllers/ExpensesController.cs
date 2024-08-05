@@ -20,6 +20,7 @@ namespace CashFlow.Api.Controllers
             [FromServices] IRegisterExpensesUseCase useCase,
             [FromBody] RequestExpensesJson request)
         {
+
             var response = await useCase.Execute(request);
 
             return Created(string.Empty, response);
