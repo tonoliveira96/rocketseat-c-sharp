@@ -1,4 +1,5 @@
-﻿using CashFlow.Communication.Requests;
+﻿using CashFlow.Application.UseCases.Login.DoLogin;
+using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,15 +10,15 @@ namespace CashFlow.Api.Controllers
     public class LoginController : Controller
     {
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseRegisterUserJson),StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseRegisterUserJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login(
-            [FromServices] useCase,
+            [FromServices] IDoLoginUseCase useCase,
             [FromBody] RequestLoginJson request
-            )
-        {
+        ){
+            var response = await useCase.Execute(request);
 
-            return View();
+            return Ok(response);
         }
     }
 }
