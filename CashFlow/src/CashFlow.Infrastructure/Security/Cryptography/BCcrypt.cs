@@ -1,8 +1,7 @@
-
 using CashFlow.Domain.Security.Criptography;
 using BC = BCrypt.Net.BCrypt;
 
-namespace CashFlow.Infrastructure.Security
+namespace CashFlow.Infrastructure.Security.Cryptography
 {
     public class BCcrypt : IPassworEncripter
     {
