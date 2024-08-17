@@ -1,69 +1,29 @@
-using CashFlow.Application.UseCases.Users.Register;
-using CashFlow.Exception;
-using CommonTestUtilities.Requests;
+using CashFlow.Communication.Requests;
 using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FluentValidation;
 
 namespace Validators.Tests.Users
 {
     public class PasswordValidatorTest
     {
-        [Fact]
-        public void Success()
-        {
-            // Arrange
-            var validator = new RegisterUserValidator();
-            var request = RequestRegisterUserJsonBuilder.Build();
-
-            // Act
-            var result = validator.Validate(request);
-
-            // Assert
-            result.IsValid.Should().BeTrue();
-        }
-
         [Theory]
         [InlineData("")]
         [InlineData("    ")]
         [InlineData(null)]
-        public void Error_Name_IEmpty(string name)
+        [InlineData("aaaa")]
+        [InlineData("aaaaaaaa")]
+        [InlineData("AAAAAAAA")]
+        [InlineData("AAAAAAA1")]
+        public void Error_Password_Invalid(string password)
         {
             // Arrange
-            var validator = new RegisterUserValidator();
-            var request = RequestRegisterUserJsonBuilder.Build();
-            request.Name = name;
+            var validator = new PasswordValidator<RequestRegisterUserJson>();
 
             // Act
-            var result = validator.Validate(request);
+            var result = validator.IsValid(new ValidationContext<RequestRegisterUserJson>(new RequestRegisterUserJson()), password);
 
             // Assert
-            result.IsValid.Should().BeFalse();
-            result.Errors.Should().ContainSingle()
-                .And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessages.NAME_EMPTY));
-        }
-
-        [Theory]
-        [InlineData("")]
-        [InlineData("    ")]
-        [InlineData(null)]
-        public void Error_Email_Empty(string email)
-        {
-            // Arrange
-            var validator = new RegisterUserValidator();
-            var request = RequestRegisterUserJsonBuilder.Build();
-            request.Name = email;
-
-            // Act
-            var result = validator.Validate(request);
-
-            // Assert
-            result.IsValid.Should().BeFalse();
-            result.Errors.Should().ContainSingle()
-                .And.Contain(e => e.ErrorMessage.Equals(ResourceErrorMessages.EMAIL_EMPTY));
+            result.Should().BeFalse();
         }
     }
 }
