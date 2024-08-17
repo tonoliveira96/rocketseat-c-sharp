@@ -12,7 +12,8 @@ namespace CashFlow.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRegisterUserJson),StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register([FromServices] RegisterUserUseCase useCase, 
+        public async Task<IActionResult> Register(
+            [FromServices] RegisterUserUseCase useCase, 
             [FromBody] RequestRegisterUserJson request)
         {
             var response = await useCase.Execute(request);

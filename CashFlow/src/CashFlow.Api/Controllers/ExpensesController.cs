@@ -5,12 +5,14 @@ using CashFlow.Application.UseCases.Expenses.Register;
 using CashFlow.Application.UseCases.Expenses.Update;
 using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CashFlow.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ExpensesController : ControllerBase
     {
         [HttpPost]
@@ -20,7 +22,6 @@ namespace CashFlow.Api.Controllers
             [FromServices] IRegisterExpensesUseCase useCase,
             [FromBody] RequestExpensesJson request)
         {
-
             var response = await useCase.Execute(request);
 
             return Created(string.Empty, response);
