@@ -7,7 +7,7 @@ namespace CashFlow.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : Controller
+    public class UserController : ControllerBase
     {
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRegisterUserJson),StatusCodes.Status201Created)]
