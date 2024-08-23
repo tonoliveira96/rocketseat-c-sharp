@@ -1,7 +1,6 @@
 using AutoMapper;
 using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
-using CashFlow.Domain.Entities;
 using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Repositories.Users;
 using CashFlow.Domain.Security.Criptography;
@@ -38,7 +37,7 @@ namespace CashFlow.Application.UseCases.Users.Register
         {
             await Validate(request);
 
-            var user = _mapper.Map<User>(request);
+            var user = _mapper.Map<Domain.Entities.User>(request);
             user.Password = _passworEncripter.Encrypt(request.Password);
             user.UserIdentifier = Guid.NewGuid();
 

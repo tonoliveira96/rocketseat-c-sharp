@@ -1,4 +1,6 @@
 using CashFlow.Application.UseCases.Users.Register;
+using CashFlow.Exception;
+using CashFlow.Exception.ExceptionBase;
 using CommonTestUtilities.Cryptograph;
 using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repository;
@@ -26,6 +28,24 @@ namespace UseCase.Test.Users.Register
             result.Token.Should().NotBeNullOrWhiteSpace();
         }
 
+        [Fact]
+        public async Task Error_Email_Empty()
+        {
+            // Arrange
+            var request = RequestRegisterUserJsonBuilder.Build();
+            request.Name = string.Empty;
+
+            var useCase = CreateUseCase();
+
+            // Act
+            var act = async () => await useCase.Execute(request);
+
+            // Assert
+            var result = await act.Should().ThrowAsync<ErrorOnValidationException>();
+
+            result.Where(ex => ex.GetErrors().Count == 1 && ex.GetErrors().Contains(ResourceErrorMessages.NAME_EMPTY));
+        }
+
         private RegisterUserUseCase CreateUseCase()
         {
             var mapper = MapperBuilder.Build();
@@ -33,8 +53,9 @@ namespace UseCase.Test.Users.Register
             var writeRepository = UserWriteOnlyRepositoryBuilder.Build();
             var passwordEncripter = PasswordEncripterBuilder.Build(); ;
             var jwtTokenGenerator = JwtTokenGeneratorBuilder.Build(); ;
+            var readRepository = new UserReadOnlyRepositoryBuilder();
 
-            return new RegisterUserUseCase(mapper, passwordEncripter, null, writeRepository, unitOfWork, jwtTokenGenerator);
+            return new RegisterUserUseCase(mapper, passwordEncripter, readRepository.Build(), writeRepository, unitOfWork, jwtTokenGenerator);
         }
     }
 }
