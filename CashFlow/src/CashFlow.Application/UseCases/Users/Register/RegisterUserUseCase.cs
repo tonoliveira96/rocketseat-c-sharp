@@ -5,6 +5,7 @@ using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Repositories.Users;
 using CashFlow.Domain.Security.Criptography;
 using CashFlow.Domain.Security.Token;
+using CashFlow.Exception;
 using CashFlow.Exception.ExceptionBase;
 
 namespace CashFlow.Application.UseCases.Users.Register
@@ -59,7 +60,7 @@ namespace CashFlow.Application.UseCases.Users.Register
 
             if (emailExist)
             {
-                result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, "E-mail já registrado."));
+                result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceErrorMessages.EMAIL_ALREAD_EXIST));
             }
 
             if (result.IsValid == false)

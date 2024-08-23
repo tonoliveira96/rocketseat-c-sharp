@@ -61,6 +61,15 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email alread exist..
+        /// </summary>
+        public static string EMAIL_ALREAD_EXIST {
+            get {
+                return ResourceManager.GetString("EMAIL_ALREAD_EXIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O e-mail não pode estar vazio..
         /// </summary>
         public static string EMAIL_EMPTY {
