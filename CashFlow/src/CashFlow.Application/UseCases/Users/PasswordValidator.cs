@@ -13,7 +13,7 @@ namespace CashFlow.Communication.Requests
 
         protected override string GetDefaultMessageTemplate(string errorCode)
         {
-            return "{ErrorMessage}";
+            return $"{{{ERROR_MESSAGE_KEY}}}";
         }
 
         public override bool IsValid(ValidationContext<T> context, string password)

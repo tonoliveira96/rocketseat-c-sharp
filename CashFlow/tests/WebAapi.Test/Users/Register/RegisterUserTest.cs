@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
+using WebApi.Test;
 using WebApi.Test.InlineData;
 
 namespace WebAapi.Test.Users.Register

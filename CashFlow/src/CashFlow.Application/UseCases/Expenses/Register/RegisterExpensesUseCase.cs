@@ -29,6 +29,7 @@ namespace CashFlow.Application.UseCases.Expenses.Register
             Validate(request);
 
             var entity = _mapper.Map<Expense>(request);
+            entity.User = ""
 
             await _repository.Add(entity);
             await _unitOfWork.Commit();

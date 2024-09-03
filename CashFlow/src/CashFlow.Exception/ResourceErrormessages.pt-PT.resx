@@ -130,7 +130,7 @@
     <value>O nome não pode estar vazio.</value>
   </data>
   <data name="PASSWORD_INVALID" xml:space="preserve">
-    <value>Sua senha deve ter pelo menos 8 caractéres e incluir pelo menis uma letra maisúscula.</value>
+    <value>Sua senha deve ter pelo menos 8 caractéres e incluir pelo menos uma letra maisúscula.</value>
   </data>
   <data name="PAYMENT_TYPE_INVALID" xml:space="preserve">
     <value>O Tipo de Pagamento não é válido.</value>
