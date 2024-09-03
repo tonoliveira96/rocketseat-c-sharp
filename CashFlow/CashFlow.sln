@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashFlow.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseCase.Test", "tests\UseCase.Test\UseCase.Test.csproj", "{9E221282-5D27-4287-A72D-5BF8558CB949}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAapi.Test", "tests\WebAapi.Test\WebAapi.Test.csproj", "{20550542-CD8A-4B05-97FB-54809EE1004F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.Test", "tests\WebAapi.Test\WebApi.Test.csproj", "{20550542-CD8A-4B05-97FB-54809EE1004F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
