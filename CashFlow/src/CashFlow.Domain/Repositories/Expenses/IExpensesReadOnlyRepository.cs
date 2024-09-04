@@ -6,6 +6,6 @@ namespace CashFlow.Domain.Repositories.Expenses
     {
         Task<List<Expense>> GetAll(User user);
         Task<Expense?> GetById(User user, long id);
-        Task<List<Expense>> FilterByMonth(DateOnly month);
+        Task<List<Expense>> FilterByMonth(User user,DateOnly month);
     }
 }
