@@ -54,6 +54,8 @@ builder.Services.AddApplication();
 
 builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 
+builder.Services.AddHttpContextAccessor();
+
 var singinKey = builder.Configuration.GetValue<string>("Settings:Jwt:SigninKey");
 
 builder.Services.AddAuthentication(config =>
