@@ -1,6 +1,5 @@
 using Bogus;
 using CashFlow.Communication.Requests;
-using CashFlow.Domain.Entities;
 
 namespace CommonTestUtilities.Requests
 {
