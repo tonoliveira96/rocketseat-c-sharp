@@ -4,13 +4,14 @@ using CommonTestUtilities.Requests;
 using FluentAssertions;
 using System.Globalization;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 using WebApi.Test.InlineData;
 
 namespace WebApi.Test.Login
 {
-    public class DoLoginTest
+    public class DoLoginTest: IClassFixture<CustomWebApplicationFactory>
     {
         private const string METHOD = "api/Login";
 
@@ -53,6 +54,8 @@ namespace WebApi.Test.Login
         public async Task Error_Login_Invalid(string culture)
         {
             var request = RequestLoginJsonBuilder.Build();
+
+            _httpClient.DefaultRequestHeaders.AcceptLanguage.Add(new StringWithQualityHeaderValue(culture));
 
             var response = await _httpClient.PostAsJsonAsync(METHOD, request);
 
