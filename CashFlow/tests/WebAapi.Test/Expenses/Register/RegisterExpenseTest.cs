@@ -3,23 +3,18 @@ using CommonTestUtilities.Requests;
 using FluentAssertions;
 using System.Globalization;
 using System.Net;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Text.Json;
 using WebApi.Test.InlineData;
 
 namespace WebApi.Test.Expenses.Register
 {
-    public class RegisterExpenseTest : IClassFixture<CustomWebApplicationFactory>
+    public class RegisterExpenseTest : CashFlowClassFixture
     {
         private const string METHOD = "api/Expenses";
         private readonly string _token;
 
-        private readonly HttpClient _httpClient;
-
-        public RegisterExpenseTest(CustomWebApplicationFactory webApplicationFactory)
+        public RegisterExpenseTest(CustomWebApplicationFactory webApplicationFactory) : base(webApplicationFactory)
         {
-            _httpClient = webApplicationFactory.CreateClient();
             _token = webApplicationFactory.GetToken();
         }
 
@@ -28,9 +23,7 @@ namespace WebApi.Test.Expenses.Register
         {
             var request = RequestRegisterExpensesJsonBuilder.Build();
 
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
-
-            var result = await _httpClient.PostAsJsonAsync(METHOD, request);
+            var result = await DoPost(requestUri: METHOD, request: request, token: _token);
 
             result.StatusCode.Should().Be(HttpStatusCode.Created);
 
@@ -48,10 +41,7 @@ namespace WebApi.Test.Expenses.Register
             var request = RequestRegisterExpensesJsonBuilder.Build();
             request.Title = string.Empty;
 
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
-            _httpClient.DefaultRequestHeaders.AcceptLanguage.Add(new StringWithQualityHeaderValue(culture));
-
-            var result = await _httpClient.PostAsJsonAsync(METHOD, request);
+            var result = await DoPost(requestUri: METHOD, request: request, token: _token, culture: culture);
 
             result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
