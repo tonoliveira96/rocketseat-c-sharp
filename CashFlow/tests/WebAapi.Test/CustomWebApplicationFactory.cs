@@ -1,3 +1,4 @@
+using CashFlow.Domain.Entities;
 using CashFlow.Domain.Security.Criptography;
 using CashFlow.Domain.Security.Token;
 using CashFlow.Infrastructure.DataAccess;
@@ -11,7 +12,8 @@ namespace WebApi.Test
 {
     public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
-        private CashFlow.Domain.Entities.User _user;
+        private Expense _expense;
+        private User _user;
         private string _password;
         private string _token;
 
@@ -47,6 +49,8 @@ namespace WebApi.Test
 
         public string GetToken() => _token;
 
+        public long GetExpenseId() => _expense.Id;
+
         private void StartDatabase(CashFlowDbContext dbContext, IPassworEncripter passworEncripter)
         {
             _user = UserBuilder.Build();
@@ -54,8 +58,20 @@ namespace WebApi.Test
             _user.Password = passworEncripter.Encrypt(_user.Password);
 
             dbContext.Users.Add(_user);
+            AddExpenses(dbContext, _user);
 
             dbContext.SaveChanges();
+        }
+
+        private void AddUsers(CashFlowDbContext dbContext, IPassworEncripter passworEncripter)
+        {
+
+        }
+
+        private  void AddExpenses(CashFlowDbContext dbContext, User user) {
+            _expense = ExpenseBuilder.Build(user);
+
+            dbContext.Expenses.Add(_expense);
         }
     }
 }

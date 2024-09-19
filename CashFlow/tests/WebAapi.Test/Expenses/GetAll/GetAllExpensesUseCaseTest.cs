@@ -3,6 +3,7 @@ using CashFlow.Domain.Entities;
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repository;
+using FluentAssertions;
 
 namespace WebApi.Test.Expenses.GetAll
 {
@@ -33,7 +34,7 @@ namespace WebApi.Test.Expenses.GetAll
             var mapper = MapperBuilder.Build();
             var loggedUser = LoggedUserBuilder.Build(user);
 
-            return new GetAllExpenseUseCase(repository, mapper, loggedUser);
+            return new GetAllExpensesUseCase(repository, mapper, loggedUser);
         }
     }
 }
