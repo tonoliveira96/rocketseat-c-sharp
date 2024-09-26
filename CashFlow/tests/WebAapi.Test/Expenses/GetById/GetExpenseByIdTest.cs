@@ -1,14 +1,9 @@
 using CashFlow.Domain.Enums;
 using CashFlow.Exception;
 using FluentAssertions;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using WebApi.Test.InlineData;
 
 namespace WebApi.Test.Expenses.GetById
@@ -22,10 +17,9 @@ namespace WebApi.Test.Expenses.GetById
 
         public GetExpenseByIdTest(CustomWebApplicationFactory webApplicationFactory) : base(webApplicationFactory)
         {
-            _token = webApplicationFactory.GetToken();
-            _expenseId = webApplicationFactory.GetExpenseId();
+            _token = webApplicationFactory.User_Team_Member.GetToken();
+            _expenseId = webApplicationFactory.Expense.GetId();
         }
-
 
         [Fact]
         public async Task Success()
