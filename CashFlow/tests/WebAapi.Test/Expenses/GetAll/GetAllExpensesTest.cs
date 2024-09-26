@@ -7,7 +7,7 @@ using FluentAssertions;
 
 namespace WebApi.Test.Expenses.GetAll
 {
-    public class GetAllExpensesUseCaseTest
+    public class GetAllExpensesTest
     {
         [Fact]
         public async Task Success()

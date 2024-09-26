@@ -3,7 +3,7 @@ using System.Net.Http.Json;
 
 namespace WebApi.Test
 {
-    public class CashFlowClassFixture : IClassFixture<CashFlowClassFixture>
+    public class CashFlowClassFixture : IClassFixture<CustomWebApplicationFactory>
     {
         private readonly HttpClient _httpClient;
 
@@ -33,6 +33,17 @@ namespace WebApi.Test
             ChangeRequestCulture(culture);
 
             return await _httpClient.GetAsync(requestUri);
+        }
+
+        protected async Task<HttpResponseMessage> DoDelete(
+            string requestUri,
+            string token,
+            string culture = "en")
+        {
+            AuthorizeRequest(token);
+            ChangeRequestCulture(culture);
+
+            return await _httpClient.DeleteAsync(requestUri);
         }
 
         private void AuthorizeRequest(string token)

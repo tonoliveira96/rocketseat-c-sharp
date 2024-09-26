@@ -14,7 +14,10 @@ namespace CashFlow.Application.UseCases.Expenses.Delete
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILoggedUser _loggedUser;
 
-        public DeleteExpenseUseCase(IExpensesWriteOnlyRepository repository, IUnitOfWork unitOfWork, ILoggedUser loggedUser, IExpensesReadOnlyRepository expenseReadOnly)
+        public DeleteExpenseUseCase(IExpensesWriteOnlyRepository repository,
+            IExpensesReadOnlyRepository expenseReadOnly,
+            IUnitOfWork unitOfWork, 
+            ILoggedUser loggedUser)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
