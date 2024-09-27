@@ -13,7 +13,9 @@ namespace CashFlow.Application.UseCases.Expenses.GetById
         private readonly IMapper _mapper;
         private readonly ILoggedUser _loggedUser;
 
-        public GetExpenseByIdUseCase(IExpensesReadOnlyRepository repository, IMapper mapper, ILoggedUser loggedUser)
+        public GetExpenseByIdUseCase(IExpensesReadOnlyRepository repository, 
+            IMapper mapper, 
+            ILoggedUser loggedUser)
         {
             _repository = repository;
             _mapper = mapper;

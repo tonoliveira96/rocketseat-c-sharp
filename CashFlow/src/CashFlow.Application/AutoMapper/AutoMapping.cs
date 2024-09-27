@@ -15,7 +15,7 @@ namespace CashFlow.Application.AutoMapper
 
         private void RequestToEntity()
         {
-            CreateMap<RequestExpensesJson, Expense>();
+            CreateMap<RequestExpenseJson, Expense>();
             CreateMap<RequestRegisterUserJson, User>()
                 .ForMember(dest => dest.Password, config => config.Ignore());
         }

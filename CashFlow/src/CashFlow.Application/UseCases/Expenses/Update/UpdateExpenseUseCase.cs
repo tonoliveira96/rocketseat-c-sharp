@@ -24,7 +24,7 @@ namespace CashFlow.Application.UseCases.Expenses.Update
             _loggedUser = loggedUser;
         }
 
-        public async Task Execute(long id, RequestExpensesJson request)
+        public async Task Execute(long id, RequestExpenseJson request)
         {
             Validate(request);
             var loggedUser = await _loggedUser.Get();
@@ -42,7 +42,7 @@ namespace CashFlow.Application.UseCases.Expenses.Update
             await _unitOfWork.Commit();
         }
 
-        private void Validate(RequestExpensesJson request)
+        private void Validate(RequestExpenseJson request)
         {
             var validator = new ExpenseValidator();
 

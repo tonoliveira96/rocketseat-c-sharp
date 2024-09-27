@@ -65,7 +65,7 @@ namespace Validators.Tests.Expenses.Register
             // Arrange
             var validator = new ExpenseValidator();
             var request = RequestRegisterExpensesJsonBuilder.Build();
-            request.PaymentType = (PaymentsType) 700;
+            request.PaymentType = (PaymentType) 700;
 
             // Act
             var result = validator.Validate(request);
