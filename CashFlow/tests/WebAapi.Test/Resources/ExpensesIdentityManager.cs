@@ -12,5 +12,7 @@ namespace WebApi.Test.Resources
         }
 
         public long GetId() => _expenses.Id;
+
+        public DateTime GetDate() => _expenses.Date;
     }
 }
