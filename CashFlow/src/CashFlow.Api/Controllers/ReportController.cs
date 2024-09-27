@@ -15,8 +15,9 @@ namespace CashFlow.Api.Controllers
         [HttpGet("excel")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> GetExcel([FromServices] IGenerateExpensesReportExcelUseCase useCase,
-            [FromHeader] DateOnly month)
+        public async Task<IActionResult> GetExcel(
+            [FromServices] IGenerateExpensesReportExcelUseCase useCase,
+            [FromRoute] DateOnly month)
         {
             byte[] file = await useCase.Execute(month);
 
@@ -29,8 +30,9 @@ namespace CashFlow.Api.Controllers
         [HttpGet("pdf")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> GetPdf([FromServices] IGenerateExpensesReportPdfUseCase useCase,
-            [FromQuery] DateOnly month)
+        public async Task<IActionResult> GetPdf(
+            [FromServices] IGenerateExpensesReportPdfUseCase useCase,
+            [FromRoute] DateOnly month)
         {
             byte[] file = await useCase.Execute(month);
 
