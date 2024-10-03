@@ -70,6 +70,15 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email alread registered..
+        /// </summary>
+        public static string EMAIL_ALREAD_REGISTERED {
+            get {
+                return ResourceManager.GetString("EMAIL_ALREAD_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O e-mail não pode estar vazio..
         /// </summary>
         public static string EMAIL_EMPTY {

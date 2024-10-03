@@ -120,6 +120,9 @@
   <data name="EMAIL_ALREAD_EXIST" xml:space="preserve">
     <value>Email alread exist.</value>
   </data>
+  <data name="EMAIL_ALREAD_REGISTERED" xml:space="preserve">
+    <value>Email alread registered.</value>
+  </data>
   <data name="EMAIL_EMPTY" xml:space="preserve">
     <value>O e-mail não pode estar vazio.</value>
   </data>
