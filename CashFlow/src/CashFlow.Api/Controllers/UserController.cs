@@ -39,7 +39,7 @@ namespace CashFlow.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateProfile(
-            [FromServices] IUpdateUserProfileUseCase useCase,
+            [FromServices] IUpdateUserUseCase useCase,
             [FromBody] RequestUpdateUserJson request)
         {
             await useCase.Execute(request);

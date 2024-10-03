@@ -38,7 +38,7 @@ namespace CashFlow.Application
             services.AddScoped<IGenerateExpensesReportPdfUseCase, GenerateExpensesReportPdfUseCase>();
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
-            services.AddScoped<IUpdateUserProfileUseCase, UpdateUserProfileUseCase>();
+            services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         }
     }

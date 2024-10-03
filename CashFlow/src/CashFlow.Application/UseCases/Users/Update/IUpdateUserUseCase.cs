@@ -2,7 +2,7 @@ using CashFlow.Communication.Requests;
 
 namespace CashFlow.Application.UseCases.Users.Update
 {
-    public interface IUpdateUserProfileUseCase
+    public interface IUpdateUserUseCase
     {
         Task Execute(RequestUpdateUserJson request);
     }

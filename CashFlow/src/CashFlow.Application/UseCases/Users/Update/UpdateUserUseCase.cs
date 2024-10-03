@@ -7,18 +7,18 @@ using CashFlow.Exception.ExceptionBase;
 
 namespace CashFlow.Application.UseCases.Users.Update
 {
-    public class UpdateUserProfileUseCase : IUpdateUserProfileUseCase
+    public class UpdateUserUseCase : IUpdateUserUseCase
     {
         private readonly ILoggedUser _loggedUser;
         private readonly IUserUpdateOnlyRepository _repository;
         private readonly IUserReadOnlyRepository _userReadOnlyRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateUserProfileUseCase(
+        public UpdateUserUseCase(
             ILoggedUser loggedUser,
+            IUserUpdateOnlyRepository repository,
             IUserReadOnlyRepository userReadOnlyRepository,
-            IUnitOfWork unitOfWork,
-            IUserUpdateOnlyRepository repository)
+            IUnitOfWork unitOfWork)
         {
             _loggedUser = loggedUser;
             _userReadOnlyRepository = userReadOnlyRepository;
@@ -52,7 +52,7 @@ namespace CashFlow.Application.UseCases.Users.Update
             {
                 var userExist = await _userReadOnlyRepository.ExistActiveUserWithEmail(request.Email);
                 if (userExist)
-                    result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceErrorMessages.EMAIL_ALREAD_REGISTERED));
+                    result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceErrorMessages.EMAIL_ALREADY_REGISTERED));
 
             }
 
