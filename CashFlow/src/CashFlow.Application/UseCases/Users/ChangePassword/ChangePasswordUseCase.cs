@@ -28,7 +28,7 @@ namespace CashFlow.Application.UseCases.Users.ChangePassword
             _passwordEncripter = passwordEncripter;
         }
 
-        public async Task Excute(RequestChangePasswordJson request)
+        public async Task Execute(RequestChangePasswordJson request)
         {
             var loggedUser = await _loggedUser.Get();
 

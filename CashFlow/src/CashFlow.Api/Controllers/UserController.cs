@@ -56,7 +56,7 @@ namespace CashFlow.Api.Controllers
             [FromServices] ChangePasswordUseCase useCase,
             [FromBody] RequestChangePasswordJson request)
         {
-            await useCase.Excute(request);
+            await useCase.Execute(request);
 
             return NoContent();
         }
