@@ -30,6 +30,13 @@ namespace CashFlow.Infrastructure.DataAccess.Repositories
             return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Email == email);
         }
 
+        public async Task Delete(User user)
+        {
+            var userToRemove = await _dbContext.Users.FindAsync(user.Id);
+
+            _dbContext.Users.Remove(userToRemove!);
+        }
+
         public void Update(User user)
         {
             _dbContext.Users.Update(user);
