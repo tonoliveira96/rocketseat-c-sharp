@@ -10,6 +10,6 @@ namespace CashFlow.Domain.Entities
         public Enums.PaymentType PaymentType { get; set; }
         public long UserId { get; set; }
         public User User { get; set; } = default!;
-        public ICollection<Entities.Tag> Tags { get; set; } = new List<Entities.Tag>();
+        public ICollection<Entities.Tag> Tags { get; set; } = [];
     }
 }
