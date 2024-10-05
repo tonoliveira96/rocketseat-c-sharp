@@ -20,6 +20,11 @@ namespace CashFlow.Application.UseCases.Expenses
             RuleFor(expense => expense.PaymentType)
                 .IsInEnum()
                 .WithMessage(ResourceErrorMessages.PAYMENT_TYPE_INVALID);
+            RuleFor(expense => expense.Tags)
+                .ForEach(rule =>
+                {
+                    rule.IsInEnum().WithMessage(ResourceErrorMessages.TAG_TYPE_NOT_SUPPORTED);
+                });
         }
     }
 }
