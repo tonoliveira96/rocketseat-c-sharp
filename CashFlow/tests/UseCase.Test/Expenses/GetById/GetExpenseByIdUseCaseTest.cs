@@ -27,7 +27,7 @@ namespace UseCase.Test.Expenses.GetById
             result.Description.Should().Be(expense.Description);
             result.Date.Should().Be(expense.Date);
             result.Amount.Should().Be(expense.Amount);
-            result.PaymentsType.Should().Be((CashFlow.Communication.Enums.PaymentType)expense.PaymentType);
+            result.PaymentType.Should().Be((CashFlow.Communication.Enums.PaymentType)expense.PaymentType);
             result.Tags.Should().NotBeNullOrEmpty().And.BeEquivalentTo(expense.Tags.Select(tag => tag.Value));
         }
 

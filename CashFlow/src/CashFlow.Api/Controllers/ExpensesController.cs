@@ -43,7 +43,7 @@ namespace CashFlow.Api.Controllers
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(typeof(ResponseExpenseJson), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(
             [FromServices] IGetExpenseByIdUseCase useCase, 
             [FromRoute] long id)
@@ -56,7 +56,7 @@ namespace CashFlow.Api.Controllers
         [HttpDelete]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(ResponseErrorJson),StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson),StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(
             [FromServices] IDeleteExpenseUseCase useCase,
             [FromRoute] long id)
