@@ -1,4 +1,5 @@
 using BarberBoss.Communication.Request;
+using BarberBoss.Exception;
 using FluentValidation;
 
 namespace BarberBoss.Application.UseCases.Billings.Create;
@@ -6,12 +7,9 @@ public class CreateBillingValidation : AbstractValidator<RequestCreateBillingJso
 {
     public CreateBillingValidation()
     {
-        RuleFor(b => b.Title).NotEmpty().WithMessage("Título é obrigatório.");
-        RuleFor(b => b.Value).GreaterThan(0).WithMessage("O valor deve ser maior que 0.");
-        RuleFor(b => b.Date).LessThanOrEqualTo(DateTime.UtcNow).WithMessage("A data não pode ser no futuro.");
-        RuleFor(expense => expense.PaymentType)
-                .IsInEnum()
-                .WithMessage("Tipo de pagamento inválido.");
+        RuleFor(b => b.Title).NotEmpty().WithMessage(ResourceErrorMessages.TITLE_REQUIRED);
+        RuleFor(b => b.Value).GreaterThan(0).WithMessage(ResourceErrorMessages.VALUE_MUST_BE_GREATER_THAN_ZERO);
+        RuleFor(b => b.Date).LessThanOrEqualTo(DateTime.UtcNow).WithMessage(ResourceErrorMessages.BILLING_CANNOT_BE_IN_FUTURE);
+        RuleFor(expense => expense.PaymentType).IsInEnum().WithMessage(ResourceErrorMessages.PAYMENT_TYPE_INVALID);
     }
 }
-

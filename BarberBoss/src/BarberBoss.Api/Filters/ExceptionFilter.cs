@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using BarberBoss.Exception.ExceptionBase;
+using BarberBoss.Exception;
 
 namespace BarberBoss.Api.Filters;
 public class ExceptionFilter : IExceptionFilter
@@ -30,7 +31,7 @@ public class ExceptionFilter : IExceptionFilter
 
     private void ThrowUnKnowError(ExceptionContext context)
     {
-        var errorResponse = new ResponseErrorJson("");
+        var errorResponse = new ResponseErrorJson(ResourceErrorMessages.UNKNOW_ERROR);
 
         context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
         context.Result = new ObjectResult(errorResponse);

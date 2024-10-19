@@ -118,28 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BILLING_CANNOT_BE_IN_FUTURE" xml:space="preserve">
-    <value>Billing cannot be for the future.</value>
+    <value>Faturamento não pode ser no futuro.</value>
   </data>
   <data name="BILLING_NOT_FOUND" xml:space="preserve">
-    <value>Billing not found.</value>
+    <value>Faturamento não encontrado.</value>
   </data>
   <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
-    <value>Email alread registered.</value>
+    <value>Email já registrado</value>
   </data>
   <data name="EMAIL_ALREAD_EXIST" xml:space="preserve">
-    <value>Email alread exist.</value>
+    <value>Email já existe.</value>
   </data>
   <data name="EMAIL_EMPTY" xml:space="preserve">
-    <value>Email cannot be empty.</value>
+    <value>O e-mail não pode estar vazio.</value>
   </data>
   <data name="EMAIL_INVALID" xml:space="preserve">
-    <value>The email is invalid.</value>
+    <value>O e-mail é inválido.</value>
   </data>
   <data name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
-    <value>Email or password invalid.</value>
+    <value>Email ou senha inválido</value>
   </data>
   <data name="INVALID_PASSWORD" xml:space="preserve">
-    <value>Invalid Password.</value>
+    <value>Senha inválida</value>
   </data>
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>O nome não pode estar vazio.</value>
@@ -148,21 +148,21 @@
     <value>The password you entered is different from the current password.</value>
   </data>
   <data name="PASSWORD_INVALID" xml:space="preserve">
-    <value>Your password must be at least 8 characters long and include at least one uppercase letter.</value>
+    <value>Sua senha deve ter pelo menos 8 caractéres e incluir pelo menis uma letra maisúscula.</value>
   </data>
   <data name="PAYMENT_TYPE_INVALID" xml:space="preserve">
-    <value>PaymentType is not valid.</value>
+    <value>Tipo de Pagamento inválido.</value>
   </data>
   <data name="TAG_TYPE_NOT_SUPPORTED" xml:space="preserve">
     <value>Tag Type Not Suppoted</value>
   </data>
   <data name="TITLE_REQUIRED" xml:space="preserve">
-    <value>The Title is required.</value>
+    <value>Título é obrigatório.</value>
   </data>
   <data name="UNKNOW_ERROR" xml:space="preserve">
     <value>Unknow error :(</value>
   </data>
   <data name="VALUE_MUST_BE_GREATER_THAN_ZERO" xml:space="preserve">
-    <value>The Amount must be greater than zero.</value>
+    <value>O Valor deve ser maior que zero.</value>
   </data>
 </root>
