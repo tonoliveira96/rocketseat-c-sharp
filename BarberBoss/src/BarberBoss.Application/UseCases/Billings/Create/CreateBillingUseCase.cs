@@ -17,7 +17,7 @@ public class CreateBillingUseCase : ICreateBillingUseCase
 
     private void Validate(RequestCreateBillingJson request)
     {
-        var validator = new CreateBillingValidation();
+        var validator = new CreateBillingValidator();
 
         var result = validator.Validate(request);
 
